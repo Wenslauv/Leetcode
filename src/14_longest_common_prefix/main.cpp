@@ -13,9 +13,6 @@
  *
  *
  * <h4>Constrains</h4>
- *      1 <= s.length <= 10^4
- *      s consists of only English letters and spaces '  '.
- *      There will be at least one word in s.
  *      1 <= strs.length <= 200
  *      0 <= strs[i].length <= 200
  *      strs[i] consists of only lowercase English letters.
