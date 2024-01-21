@@ -69,6 +69,8 @@ namespace leetcode {
             
             test1();
             test2();
+            test3();
+            test4();
 
             std::cout << "All tests passed successfully" << std::endl;
         }
