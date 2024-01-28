@@ -1,21 +1,7 @@
 /**
- *
  * \file
- * \brief [Two Sum](https://leetcode.com/problems/two-sum/)
  *
  * \author Viachaslau Kukhtsiuk (https://github.com/Wenslauv)
- *
- * \details
- * <h4>Problem</h4>
- * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
- * You may assume that each input would have exactly one solution, and you may not use the same element twice.
- * You can return the answer in any order.
- *
- * <h4>Constrains</h4>
- *      2 <= nums.length <= 104
- *      -10^9 <= nums[i] <= 10^9
- *      -10^9 <= target <= 10^9
- *      Only one valid answer exists.
  */
 
 
