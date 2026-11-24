@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""pre-commit: every task in src/ must be listed in the README.md problem table.
+
+A missing task is added to the table (the title comes from TEST_CASE("NNNN. Title")
+in its solution.cpp) and README.md is staged into the same commit.
+
+Enable once per clone:  git config core.hooksPath .githooks
+"""
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+
+def git(*args):
+    return subprocess.run(["git", *args], check=True, capture_output=True, text=True).stdout
+
+
+def split_row(line):
+    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+
+def main():
+    root = Path(git("rev-parse", "--show-toplevel").strip())
+    readme = root / "README.md"
+    if not readme.exists():
+        print("pre-commit: README.md not found", file=sys.stderr)
+        return 1
+
+    # tasks that will be in this commit: everything in the index
+    tasks = {}
+    for path in git("ls-files", "--", "src/*/solution.cpp").splitlines():
+        folder = Path(path).parent.name
+        number = re.match(r"\d+", folder)
+        if not number:
+            continue
+        text = (root / path).read_text(encoding="utf-8")
+        test_case = re.search(r'TEST_CASE\s*\(\s*"\d+\.\s*([^"]+)"', text)
+        if test_case:
+            title = test_case.group(1).strip()
+        else:
+            title = folder[number.end():].strip("_ ").replace("_", " ").title()
+        tasks[int(number.group())] = (title, folder)
+
+    lines = readme.read_text(encoding="utf-8").split("\n")
+    header = next((i for i, line in enumerate(lines)
+                   if re.match(r"\|\s*#\s*\|\s*Problem\s*\|", line)), None)
+    if header is None:
+        print("pre-commit: problem table not found in README.md", file=sys.stderr)
+        return 1
+
+    end = header + 2
+    while end < len(lines) and lines[end].startswith("|"):
+        end += 1
+    rows = [split_row(line) for line in lines[header + 2:end]]
+    listed = {int(row[0]) for row in rows if row[0].isdigit()}
+
+    missing = sorted(set(tasks) - listed)
+    if not missing:
+        return 0
+
+    for number in missing:
+        title, folder = tasks[number]
+        rows.append([str(number), "[%s](src/%s)" % (title, folder.replace(" ", "%20")), "?"])
+    rows.sort(key=lambda row: int(row[0]) if row[0].isdigit() else sys.maxsize)
+
+    head = split_row(lines[header])
+    widths = [max(len(head[i]), *(len(row[i]) for row in rows)) for i in range(len(head))]
+
+    def fmt(cells):
+        return "| " + " | ".join(cell.ljust(widths[i]) for i, cell in enumerate(cells)) + " |"
+
+    lines[header:end] = [fmt(head), "|" + "|".join("-" * (w + 2) for w in widths) + "|"] + \
+                        [fmt(row) for row in rows]
+    readme.write_text("\n".join(lines), encoding="utf-8")
+    git("add", str(readme))
+
+    for number in missing:
+        print("README.md: added %d. %s — difficulty is '?', fill it in" % (number, tasks[number][0]))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
