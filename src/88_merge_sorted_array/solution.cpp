@@ -41,7 +41,7 @@ namespace leetcode::merge_sorted_array {
         int idxB = n - 1;
         int idxR = std::ssize(nums1) - 1;
 
-        while (idxR >= 1) {
+        while (idxR >= 0) {
             
             if (idxA >= 0 and idxB >= 0) {
                 int& valueA = nums1[idxA];
@@ -94,7 +94,7 @@ namespace leetcode::merge_sorted_array {
                 std::vector<int>    nums1   { 1 };
                 int                 m       { 1 };
 
-                std::vector<int>    nums2   { };
+                std::vector<int>    nums2   {   };
                 int                 n       { 0 };
 
                 merge(nums1, m, nums2, n);

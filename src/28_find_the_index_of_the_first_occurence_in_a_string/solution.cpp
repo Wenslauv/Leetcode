@@ -69,7 +69,7 @@ namespace leetcode::find_the_index_of_the_first_occurrence_in_a_string {
 
 
             SUBCASE("test 4") {
-                CHECK( strStr("a", "a") == 1 );
+                CHECK( strStr("a", "a") == 0 );
             }
 
         }
