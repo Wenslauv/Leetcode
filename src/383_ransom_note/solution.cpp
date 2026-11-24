@@ -22,8 +22,10 @@
 #include <iostream>
 #include <string>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::ransom_note {
 
     bool canConstruct(std::string ransomNote, std::string magazine) {
         int frequency[26] = {0};
@@ -45,36 +47,23 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            assert( canConstruct( "a", "b") == false);
-        }
+        TEST_CASE("0383. Ransom Note") {
 
-        void test2() {
-            assert( canConstruct( "aa", "ab") == false);
-
-        }
-
-        void test3() {
-            assert( canConstruct( "aa", "aab") == true);
-        }
+            SUBCASE("test 1") {
+                CHECK( canConstruct( "a", "b") == false);
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                CHECK( canConstruct( "aa", "ab") == false);
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                CHECK( canConstruct( "aa", "aab") == true);
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::ransom_note

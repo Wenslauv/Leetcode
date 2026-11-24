@@ -29,15 +29,17 @@
 #include <iostream>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::remove_duplicates_from_sorted_array_ii {
 
     int removeDuplicates(std::vector<int>& nums) {
         int unique = nums[0];
         int count  = 1;
         int index = 1;
 
-        int size    = static_cast<int>( std::size(nums) );
+        const int size  = std::ssize(nums);
 
         for (int i = 1; i < size; ++i ) {
             if (nums[i] == unique) {
@@ -61,44 +63,32 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            std::vector<int> nums       {1,1,1,2,2,3};
-            std::vector<int> expected   {1,1,2,2,3};
+        TEST_CASE("0080. Remove Duplicates from Sorted Array II") {
 
-            int k = removeDuplicates(nums);
-            assert(k == expected.size());
-            for (int i = 0; i < k; i++) {
-                assert(nums[i] == expected[i]);
+            SUBCASE("test 1") {
+                std::vector<int> nums       {1,1,1,2,2,3};
+                std::vector<int> expected   {1,1,2,2,3};
+
+                int k = removeDuplicates(nums);
+                CHECK(k == expected.size());
+                for (int i = 0; i < k; i++) {
+                    CHECK(nums[i] == expected[i]);
+                }
             }
-        }
 
-        void test2() {
-            std::vector<int> nums       {0,0,1,1,1,1,2,3,3};
-            std::vector<int> expected   {0,0,1,1,2,3,3};
 
-            int k = removeDuplicates(nums);
-            assert(k == expected.size());
-            for (int i = 0; i < k; i++) {
-                assert(nums[i] == expected[i]);
+            SUBCASE("test 2") {
+                std::vector<int> nums       {0,0,1,1,1,1,2,3,3};
+                std::vector<int> expected   {0,0,1,1,2,3,3};
+
+                int k = removeDuplicates(nums);
+                CHECK(k == expected.size());
+                for (int i = 0; i < k; i++) {
+                    CHECK(nums[i] == expected[i]);
+                }
             }
-        }
 
-
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-
-            std::cout << "All tests passed successfully" << std::endl;
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::remove_duplicates_from_sorted_array_ii

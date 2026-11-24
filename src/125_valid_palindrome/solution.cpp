@@ -22,12 +22,14 @@
 #include <string>
 #include <cctype>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::valid_palindrome {
 
     bool isPalindrome(std::string s) {
         int front = 0;
-        int back = static_cast<int>(s.length()) - 1;
+        int back = std::ssize(s) - 1;
 
         while (front <= back) {
             if (not std::isalnum(s[front])) {
@@ -53,35 +55,23 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( isPalindrome( "A man, a plan, a canal: Panama" ) == true );
-        }
+        TEST_CASE("0125. Valid Palindrome") {
 
-        void test2() {
-            assert( isPalindrome( "race a car" ) == false );
-        }
-
-        void test3() {
-            assert( isPalindrome( " " ) == true );
-        }
+            SUBCASE("test 1") {
+                CHECK( isPalindrome( "A man, a plan, a canal: Panama" ) == true );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                CHECK( isPalindrome( "race a car" ) == false );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                CHECK( isPalindrome( " " ) == true );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::valid_palindrome

@@ -20,17 +20,20 @@
 #include <iostream>
 #include <string>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::find_the_index_of_the_first_occurrence_in_a_string {
 
     int strStr(std::string haystack, std::string needle) {
-        int overallLength = static_cast<int>( haystack.size() ) - static_cast<int>( needle.size() ) + 1;
+        const int overallLength = std::ssize( haystack ) - std::ssize( needle ) + 1;
+        const int needleLength  = std::ssize( needle );
 
         for (int i = 0; i < overallLength; ++i) {
             if (needle[0] == haystack[i]) {
                 bool wholeWordFound = true;
 
-                for (int j = 1; j < needle.size(); ++j) {
+                for (int j = 1; j < needleLength; ++j) {
                     if (needle[j] != haystack[i + j]) {
                         wholeWordFound = false;
                         break;
@@ -48,39 +51,28 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            assert( strStr("sadbutsad", "sad") == 0 );
-        }
+        TEST_CASE("0028. Find the Index of the First Occurrence in a String") {
 
-        void test2() {
-            assert( strStr("leetcode", "leeto") == -1 );
-        }
+            SUBCASE("test 1") {
+                CHECK( strStr("sadbutsad", "sad") == 0 );
+            }
 
-        void test3() {
-            assert( strStr("saadbutsad", "sad") == 7 );
-        }
 
-        void test4() {
-            assert( strStr("a", "a") == 1 );
-        }
+            SUBCASE("test 2") {
+                CHECK( strStr("leetcode", "leeto") == -1 );
+            }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
-            test4();
 
-            std::cout << "All tests passed successfully" << std::endl;
+            SUBCASE("test 3") {
+                CHECK( strStr("saadbutsad", "sad") == 7 );
+            }
+
+
+            SUBCASE("test 4") {
+                CHECK( strStr("a", "a") == 0 );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::find_the_index_of_the_first_occurrence_in_a_string

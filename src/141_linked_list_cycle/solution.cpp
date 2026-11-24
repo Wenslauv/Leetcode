@@ -25,12 +25,15 @@
  */
 
 
+#include <vector>
 #include <cassert>
 #include <iostream>
 #include <string>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::linked_list_cycle {
 
     struct ListNode {
         int val;
@@ -58,58 +61,47 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            std::vector<ListNode> nodes = {
-                ListNode(3),
-                ListNode(2),
-                ListNode(0),
-                ListNode(-4)
-            };
+        TEST_CASE("0141. Linked List Cycle") {
 
-            nodes[0].next = &nodes[1];
-            nodes[1].next = &nodes[2];
-            nodes[2].next = &nodes[3];
-            nodes[3].next = &nodes[1];
+            SUBCASE("test 1") {
+                std::vector<ListNode> nodes = {
+                    ListNode(3),
+                    ListNode(2),
+                    ListNode(0),
+                    ListNode(-4)
+                };
 
-            assert( hasCycle( &nodes[0] ) == true);
-        }
+                nodes[0].next = &nodes[1];
+                nodes[1].next = &nodes[2];
+                nodes[2].next = &nodes[3];
+                nodes[3].next = &nodes[1];
 
-        void test2() {
-            std::vector<ListNode> nodes = {
-                ListNode(1),
-                ListNode(2),
-            };
-
-            nodes[0].next = &nodes[1];
-            nodes[1].next = &nodes[0];
-
-            assert( hasCycle( &nodes[0] ) == true);
-        }
-
-        void test3() {
-            std::vector<ListNode> nodes = {
-                ListNode(1),
-            };
-
-            assert( hasCycle( &nodes[0] ) == false);        }
+                CHECK( hasCycle( &nodes[0] ) == true);
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                std::vector<ListNode> nodes = {
+                    ListNode(1),
+                    ListNode(2),
+                };
 
-            std::cout << "All tests passed successfully" << std::endl;
+                nodes[0].next = &nodes[1];
+                nodes[1].next = &nodes[0];
+
+                CHECK( hasCycle( &nodes[0] ) == true);
+            }
+
+
+            SUBCASE("test 3") {
+                std::vector<ListNode> nodes = {
+                    ListNode(1),
+                };
+
+                CHECK( hasCycle( &nodes[0] ) == false);
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::linked_list_cycle

@@ -20,8 +20,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::factorial_trailing_zeroes {
 
     int trailingZeroes(int n) {
         int count {};
@@ -37,35 +39,23 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( trailingZeroes(3) == 0 );
-        }
+        TEST_CASE("0172. Factorial Trailing Zeroes") {
 
-        void test2() {
-            assert( trailingZeroes(5) == 1 );
-        }
-
-        void test3() {
-            assert( trailingZeroes(0) == 0 );
-        }
+            SUBCASE("test 1") {
+                CHECK( trailingZeroes(3) == 0 );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                CHECK( trailingZeroes(5) == 1 );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                CHECK( trailingZeroes(0) == 0 );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::factorial_trailing_zeroes

@@ -31,8 +31,10 @@
 #include <string>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::summary_ranges {
 
     std::string intervalToString(const int& start, const int& end) {
         if (start == end) {
@@ -44,7 +46,7 @@ namespace leetcode {
 
 
     std::vector<std::string> summaryRanges(std::vector<int>& nums) {
-        const int size = static_cast<int>( std::size(nums) );
+        const int size = std::ssize(nums);
 
         if (size == 0)
             return {};
@@ -81,34 +83,22 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            std::vector<int> nums {0,1,2,4,5,7};
-            
-            assert( summaryRanges( nums ) == (std::vector<std::string>{ "0->2", "4->5", "7" }) );
-        }
+        TEST_CASE("0228. Summary Ranges") {
 
-        void test2() {
-            std::vector<int> nums {0,2,3,4,6,8,9};
+            SUBCASE("test 1") {
+                std::vector<int> nums {0,1,2,4,5,7};
 
-            assert( summaryRanges( nums ) == (std::vector<std::string>{ "0","2->4","6","8->9" }) );
-        }
+                CHECK( summaryRanges( nums ) == (std::vector<std::string>{ "0->2", "4->5", "7" }) );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
+            SUBCASE("test 2") {
+                std::vector<int> nums {0,2,3,4,6,8,9};
 
-            std::cout << "All tests passed successfully" << std::endl;
+                CHECK( summaryRanges( nums ) == (std::vector<std::string>{ "0","2->4","6","8->9" }) );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::summary_ranges

@@ -26,13 +26,15 @@
 #include <string>
 #include <unordered_map>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::isomorphic_strings {
 
     bool isIsomorphic(std::string s, std::string t) {
         std::unordered_map<char, char> subsTable {};
 
-        int size = static_cast<int>( s.size() );
+        int size = std::ssize(s);
 
         for (int i = 0; i < size; ++i) {
             const char& symbol = s[i];
@@ -65,44 +67,33 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            assert( isIsomorphic("egg", "add") == true );
-        }
+        TEST_CASE("0205. Isomorphic Strings") {
 
-        void test2() {
-            assert( isIsomorphic("foo", "bar") == false );
-        }
+            SUBCASE("test 1") {
+                CHECK( isIsomorphic("egg", "add") == true );
+            }
 
-        void test3() {
-            assert( isIsomorphic("paper", "title") == true );
-        }
 
-        void test4() {
-            assert( isIsomorphic("badc", "baba") == false );
-        }
+            SUBCASE("test 2") {
+                CHECK( isIsomorphic("foo", "bar") == false );
+            }
 
-        void test5() {
-            assert( isIsomorphic("egcd", "adfd") == false );
-        }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
-            test4();
-            test5();
+            SUBCASE("test 3") {
+                CHECK( isIsomorphic("paper", "title") == true );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 4") {
+                CHECK( isIsomorphic("badc", "baba") == false );
+            }
+
+
+            SUBCASE("test 5") {
+                CHECK( isIsomorphic("egcd", "adfd") == false );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::isomorphic_strings

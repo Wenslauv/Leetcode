@@ -26,8 +26,10 @@
 #include <string>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::valid_parentheses {
 
     bool isValid(std::string s) {
         if (s.length() % 2 != 0) {
@@ -61,44 +63,33 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            assert( isValid( "()" ) == true );
-        }
+        TEST_CASE("0020. Valid Parentheses") {
 
-        void test2() {
-            assert( isValid( "()[]{}" ) == true );
-        }
+            SUBCASE("test 1") {
+                CHECK( isValid( "()" ) == true );
+            }
 
-        void test3() {
-            assert( isValid( "(]" ) == false );
-        }
 
-        void test4() {
-            assert( isValid( "([)]" ) == false );
-        }
+            SUBCASE("test 2") {
+                CHECK( isValid( "()[]{}" ) == true );
+            }
 
-        void test5() {
-            assert( isValid( "){" ) == false );
-        }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
-            test4();
-            test5();
+            SUBCASE("test 3") {
+                CHECK( isValid( "(]" ) == false );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 4") {
+                CHECK( isValid( "([)]" ) == false );
+            }
+
+
+            SUBCASE("test 5") {
+                CHECK( isValid( "){" ) == false );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::valid_parentheses

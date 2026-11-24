@@ -22,8 +22,10 @@
 #include <string>
 #include <unordered_map>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::valid_anagram {
 
     bool isAnagram(std::string s, std::string t) {
         if (s.length() != t.length())
@@ -50,31 +52,18 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( isAnagram("anagram", "nagaram") == true );
-        }
+        TEST_CASE("0242. Valid Anagram") {
 
-        void test2() {
-            assert( isAnagram("rat", "car") == false );
-
-        }
+            SUBCASE("test 1") {
+                CHECK( isAnagram("anagram", "nagaram") == true );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
+            SUBCASE("test 2") {
+                CHECK( isAnagram("rat", "car") == false );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::valid_anagram

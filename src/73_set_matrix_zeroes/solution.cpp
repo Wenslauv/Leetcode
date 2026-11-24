@@ -9,12 +9,14 @@
 #include <iostream>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::set_matrix_zeroes {
 
     void setZeroes(std::vector<std::vector<int>>& matrix) {
-        const auto rows     = std::size(matrix);
-        const auto columns  = std::size(matrix.front());
+        const auto rows     = std::ssize(matrix);
+        const auto columns  = std::ssize(matrix.front());
         
         bool firstRowHasZeroes      = false;
         bool firstColumnHasZeroes   = false;
@@ -65,60 +67,48 @@ namespace leetcode {
 
 
     namespace testing {
+
         
         using Matrix_t = std::vector<std::vector<int>>;
 
-        void test1() {
-            Matrix_t matrix {
-                {1,1,1},
-                {1,0,1},
-                {1,1,1}
-            };
+        TEST_CASE("0073. Set Matrix Zeroes") {
 
-            Matrix_t expected {
-                {1,0,1},
-                {0,0,0},
-                {1,0,1}
-            };
+            SUBCASE("test 1") {
+                Matrix_t matrix {
+                    {1,1,1},
+                    {1,0,1},
+                    {1,1,1}
+                };
 
-            setZeroes(matrix);
-            assert(matrix == expected);
-        }
+                Matrix_t expected {
+                    {1,0,1},
+                    {0,0,0},
+                    {1,0,1}
+                };
 
-        void test2() {
-            Matrix_t matrix {
-                {0,1,2,0},
-                {3,4,5,2},
-                {1,3,1,5}
-            };
-
-            Matrix_t expected {
-                {0,0,0,0},
-                {0,4,5,0},
-                {0,3,1,0}
-            };
-
-            setZeroes(matrix);
-            assert(matrix == expected);
-
-        }
+                setZeroes(matrix);
+                CHECK(matrix == expected);
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
+            SUBCASE("test 2") {
+                Matrix_t matrix {
+                    {0,1,2,0},
+                    {3,4,5,2},
+                    {1,3,1,5}
+                };
 
-            std::cout << "All tests passed successfully" << std::endl;
+                Matrix_t expected {
+                    {0,0,0,0},
+                    {0,4,5,0},
+                    {0,3,1,0}
+                };
+
+                setZeroes(matrix);
+                CHECK(matrix == expected);
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::set_matrix_zeroes

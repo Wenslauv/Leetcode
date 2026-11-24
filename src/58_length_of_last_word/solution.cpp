@@ -23,8 +23,10 @@
 #include <iostream>
 #include <string>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::length_of_last_word {
 
     int lengthOfLastWord(std::string s) {
         auto last = std::prev(std::end(s));
@@ -47,39 +49,28 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( lengthOfLastWord("Hello World") == 5 );
-        }
+        TEST_CASE("0058. Length of Last Word") {
 
-        void test2() {
-            assert( lengthOfLastWord("   fly me   to   the moon  ") == 4 );
-        }
+            SUBCASE("test 1") {
+                CHECK( lengthOfLastWord("Hello World") == 5 );
+            }
 
-        void test3() {
-            assert( lengthOfLastWord("luffy is still joyboy") == 6 );
-        }
 
-        void test4() {
-            assert( lengthOfLastWord("a") == 1 );
-        }
+            SUBCASE("test 2") {
+                CHECK( lengthOfLastWord("   fly me   to   the moon  ") == 4 );
+            }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
-            test4();
 
-            std::cout << "All tests passed successfully" << std::endl;
+            SUBCASE("test 3") {
+                CHECK( lengthOfLastWord("luffy is still joyboy") == 6 );
+            }
+
+
+            SUBCASE("test 4") {
+                CHECK( lengthOfLastWord("a") == 1 );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::length_of_last_word

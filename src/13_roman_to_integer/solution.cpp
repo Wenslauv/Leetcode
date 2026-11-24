@@ -39,8 +39,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::roman_to_integer {
     
     int convert(char c) {
                 if (c == 'I')  return 1;
@@ -58,7 +60,7 @@ namespace leetcode {
     int romanToInt(std::string s) {
         int sum {};
 
-        for (int i = static_cast<int>(s.length() - 1); i >= 0; --i) {
+        for (int i = std::ssize(s) - 1; i >= 0; --i) {
             if (i != 0) {
                 int s_curr = convert( s[i] );
                 int s_prev = convert( s[i-1] );
@@ -83,35 +85,23 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( romanToInt("III") == 3 );
-        }
+        TEST_CASE("0013. Roman to Integer") {
 
-        void test2() {
-            assert( romanToInt("LVIII") == 58 );
-        }
-
-        void test3() {
-            assert( romanToInt("MCMXCIV") == 1994 );
-        }
+            SUBCASE("test 1") {
+                CHECK( romanToInt("III") == 3 );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                CHECK( romanToInt("LVIII") == 58 );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                CHECK( romanToInt("MCMXCIV") == 1994 );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::roman_to_integer

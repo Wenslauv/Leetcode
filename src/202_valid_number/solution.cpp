@@ -27,8 +27,10 @@
 #include <iostream>
 #include <unordered_set>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::happy_number {
 
     int squareDigits(int n) {
         int sum{};
@@ -60,31 +62,18 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( isHappy(19) == true );
-        }
+        TEST_CASE("0202. Happy Number") {
 
-        void test2() {
-            assert( isHappy(2) == false );
-
-        }
+            SUBCASE("test 1") {
+                CHECK( isHappy(19) == true );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
+            SUBCASE("test 2") {
+                CHECK( isHappy(2) == false );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::happy_number
