@@ -19,6 +19,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <vector>
 
 #include <doctest/doctest.h>
 
