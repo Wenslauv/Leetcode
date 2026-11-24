@@ -31,7 +31,7 @@ namespace leetcode::majority_element {
     int majorityElement(std::vector<int>& nums) {
         int candidate = 0;
         int count = 0;
-        int size = static_cast<int>( std::size(nums) );
+        int size = std::ssize(nums);
 
 
         for (int i = 0; i < size; ++i) {

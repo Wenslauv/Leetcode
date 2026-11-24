@@ -39,7 +39,7 @@ namespace leetcode::merge_sorted_array {
 
         int idxA = m - 1;
         int idxB = n - 1;
-        int idxR = static_cast<int>(std::size(nums1)) - 1;
+        int idxR = std::ssize(nums1) - 1;
 
         while (idxR >= 1) {
             

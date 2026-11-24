@@ -32,7 +32,7 @@ namespace leetcode::remove_duplicates_from_sorted_array {
 
     int removeDuplicates(std::vector<int>& nums) {
         int unique  = 1;
-        int size    = static_cast<int>( std::size(nums) );
+        int size    = std::ssize(nums);
 
         for (int i = 1; i < size; ++i ) {
             if (nums[i] != nums[i-1]) {

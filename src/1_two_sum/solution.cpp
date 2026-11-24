@@ -32,7 +32,7 @@
 namespace leetcode::two_sum {
     
     std::vector<int> twoSum(std::vector<int>& nums, int target) {
-        const auto size = std::size(nums);
+        const auto size = std::ssize(nums);
 
         std::unordered_map<int, int> cache {};
 

@@ -34,7 +34,7 @@ namespace leetcode::isomorphic_strings {
     bool isIsomorphic(std::string s, std::string t) {
         std::unordered_map<char, char> subsTable {};
 
-        int size = static_cast<int>( s.size() );
+        int size = std::ssize(s);
 
         for (int i = 0; i < size; ++i) {
             const char& symbol = s[i];

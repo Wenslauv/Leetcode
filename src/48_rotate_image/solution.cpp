@@ -15,7 +15,7 @@
 namespace leetcode::rotate_image {
 
     void rotate(std::vector<std::vector<int>>& matrix) {
-        const auto count = std::size(matrix);
+        const auto count = std::ssize(matrix);
 
         for (int i = 0; i < count; ++i) {
             for (int j = 0; j < i; ++j) {

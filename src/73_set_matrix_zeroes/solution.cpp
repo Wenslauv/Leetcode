@@ -15,8 +15,8 @@
 namespace leetcode::set_matrix_zeroes {
 
     void setZeroes(std::vector<std::vector<int>>& matrix) {
-        const auto rows     = std::size(matrix);
-        const auto columns  = std::size(matrix.front());
+        const auto rows     = std::ssize(matrix);
+        const auto columns  = std::ssize(matrix.front());
         
         bool firstRowHasZeroes      = false;
         bool firstColumnHasZeroes   = false;

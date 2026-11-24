@@ -34,7 +34,7 @@ namespace leetcode::longest_common_prefix {
         if (strs.size() == 1)
             return strs.front();
 
-        int size            = static_cast<int>( strs.size() );
+        const int size      = std::ssize(strs);
         std::string prefix  = strs.front();
 
         for (int i = 1; i < size; ++i) {
@@ -44,7 +44,7 @@ namespace leetcode::longest_common_prefix {
                 prefix.resize( current.size() );
             }
 
-            int prefixSize = static_cast<int>( prefix.size() );
+            const int prefixSize = std::ssize(prefix);
             for (int j = 0; j < prefixSize; ++j) {
 
                 if (prefix[j] != current[j]) {

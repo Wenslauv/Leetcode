@@ -60,7 +60,7 @@ namespace leetcode::roman_to_integer {
     int romanToInt(std::string s) {
         int sum {};
 
-        for (int i = static_cast<int>(s.length() - 1); i >= 0; --i) {
+        for (int i = std::ssize(s) - 1; i >= 0; --i) {
             if (i != 0) {
                 int s_curr = convert( s[i] );
                 int s_prev = convert( s[i-1] );

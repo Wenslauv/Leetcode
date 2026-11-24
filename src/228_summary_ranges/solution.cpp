@@ -46,7 +46,7 @@ namespace leetcode::summary_ranges {
 
 
     std::vector<std::string> summaryRanges(std::vector<int>& nums) {
-        const int size = static_cast<int>( std::size(nums) );
+        const int size = std::ssize(nums);
 
         if (size == 0)
             return {};

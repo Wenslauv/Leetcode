@@ -16,9 +16,9 @@
 namespace leetcode::valid_sudoku {
 
     bool isValidSudoku(std::vector<std::vector<char>>& board) {
-        bool rows   [9][9]  { false };
-        bool columns[9][9]  { false };
-        bool cells  [9][9]  { false };
+        bool rows   [9][9]  {  };
+        bool columns[9][9]  {  };
+        bool cells  [9][9]  {  };
 
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {

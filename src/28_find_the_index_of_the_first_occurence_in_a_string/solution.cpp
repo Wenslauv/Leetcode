@@ -26,13 +26,14 @@
 namespace leetcode::find_the_index_of_the_first_occurrence_in_a_string {
 
     int strStr(std::string haystack, std::string needle) {
-        int overallLength = static_cast<int>( haystack.size() ) - static_cast<int>( needle.size() ) + 1;
+        const int overallLength = std::ssize( haystack ) - std::ssize( needle ) + 1;
+        const int needleLength  = std::ssize( needle );
 
         for (int i = 0; i < overallLength; ++i) {
             if (needle[0] == haystack[i]) {
                 bool wholeWordFound = true;
 
-                for (int j = 1; j < needle.size(); ++j) {
+                for (int j = 1; j < needleLength; ++j) {
                     if (needle[j] != haystack[i + j]) {
                         wholeWordFound = false;
                         break;

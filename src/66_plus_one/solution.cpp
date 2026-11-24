@@ -26,7 +26,7 @@
 namespace leetcode::plus_one {
 
     std::vector<int> plusOne(std::vector<int>& digits) {
-        const int size = static_cast<int>(digits.size());
+        const int size = std::ssize(digits);
 
         std::vector<int> result(size + 1);
 

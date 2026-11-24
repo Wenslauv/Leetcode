@@ -29,7 +29,7 @@ namespace leetcode::valid_palindrome {
 
     bool isPalindrome(std::string s) {
         int front = 0;
-        int back = static_cast<int>(s.length()) - 1;
+        int back = std::ssize(s) - 1;
 
         while (front <= back) {
             if (not std::isalnum(s[front])) {

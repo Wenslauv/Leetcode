@@ -32,7 +32,7 @@
 namespace leetcode::remove_element {
 
     int removeElement(std::vector<int>& nums, int val) {
-        int size = static_cast<int>( nums.size() );
+        const int size = std::ssize(nums);
         
         int place = 0;
 
