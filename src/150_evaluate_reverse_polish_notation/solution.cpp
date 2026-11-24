@@ -11,8 +11,10 @@
 #include <string>
 #include <stack>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::evaluate_reverse_polish_notation {
 
     int evalRPN(std::vector<std::string>& tokens) {
         std::stack<int> prn {};
@@ -41,47 +43,35 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            std::vector<std::string> tokens {"2","1","+","3","*"};
-            int expected = 9;
+        TEST_CASE("0150. Evaluate Reverse Polish Notation") {
 
-            auto result = evalRPN(tokens);
-            assert(result == expected);
-        }
+            SUBCASE("test 1") {
+                std::vector<std::string> tokens {"2","1","+","3","*"};
+                int expected = 9;
 
-        void test2() {
-            std::vector<std::string> tokens {"4","13","5","/","+"};
-            int expected = 6;
-
-            auto result = evalRPN(tokens);
-            assert(result == expected);
-        }
-
-        void test3() {
-            std::vector<std::string> tokens {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
-            int expected = 22;
-
-            auto result = evalRPN(tokens);
-            assert(result == expected);
-        }
+                auto result = evalRPN(tokens);
+                CHECK(result == expected);
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                std::vector<std::string> tokens {"4","13","5","/","+"};
+                int expected = 6;
 
-            std::cout << "All tests passed successfully" << std::endl;
+                auto result = evalRPN(tokens);
+                CHECK(result == expected);
+            }
+
+
+            SUBCASE("test 3") {
+                std::vector<std::string> tokens {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
+                int expected = 22;
+
+                auto result = evalRPN(tokens);
+                CHECK(result == expected);
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::evaluate_reverse_polish_notation

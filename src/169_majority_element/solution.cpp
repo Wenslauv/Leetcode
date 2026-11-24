@@ -23,8 +23,10 @@
 #include <iostream>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::majority_element {
 
     int majorityElement(std::vector<int>& nums) {
         int candidate = 0;
@@ -50,33 +52,22 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1() {
-            std::vector<int> nums { 3,2,3 };
+        TEST_CASE("0169. Majority Element") {
 
-            assert( majorityElement(nums) == 3);
-        }
+            SUBCASE("test 1") {
+                std::vector<int> nums { 3,2,3 };
 
-        void test2() {
-            std::vector<int> nums { 2,2,1,1,1,2,2 };
+                CHECK( majorityElement(nums) == 3);
+            }
 
-            assert( majorityElement(nums) == 2);
-        }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
+            SUBCASE("test 2") {
+                std::vector<int> nums { 2,2,1,1,1,2,2 };
 
-            std::cout << "All tests passed successfully" << std::endl;
+                CHECK( majorityElement(nums) == 2);
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::majority_element

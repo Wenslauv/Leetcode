@@ -18,8 +18,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::palindrome_number {
     
     bool isPalindrome(int x) {
             if (x < 0)
@@ -40,35 +42,23 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            assert( isPalindrome(121) == true );
-        }
+        TEST_CASE("0009. Palindrome Number") {
 
-        void test2() {
-            assert( isPalindrome(-121) == false );
-        }
-
-        void test3() {
-            assert( isPalindrome(10) == false );
-        }
+            SUBCASE("test 1") {
+                CHECK( isPalindrome(121) == true );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                CHECK( isPalindrome(-121) == false );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                CHECK( isPalindrome(10) == false );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::palindrome_number

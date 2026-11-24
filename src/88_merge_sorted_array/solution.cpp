@@ -24,8 +24,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::merge_sorted_array {
     
     void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
         /* 
@@ -73,60 +75,47 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            std::vector<int>    nums1   { 1,2,3,0,0,0 };
-            int                 m       { 3 };
+        TEST_CASE("0088. Merge Sorted Array") {
 
-            std::vector<int>    nums2   { 2,5,6 };
-            int                 n       { 3 };
+            SUBCASE("test 1") {
+                std::vector<int>    nums1   { 1,2,3,0,0,0 };
+                int                 m       { 3 };
 
-            merge(nums1, m, nums2, n);
-            
-            assert( (nums1 == std::vector{ 1,2,2,3,5,6 }) );
-        }
+                std::vector<int>    nums2   { 2,5,6 };
+                int                 n       { 3 };
 
-        void test2() {
-            std::vector<int>    nums1   { 1 };
-            int                 m       { 1 };
+                merge(nums1, m, nums2, n);
 
-            std::vector<int>    nums2   { };
-            int                 n       { 0 };
-
-            merge(nums1, m, nums2, n);
-
-            assert( (nums1 == std::vector{ 1 }) );
-        }
+                CHECK( (nums1 == std::vector{ 1,2,2,3,5,6 }) );
+            }
 
 
-        void test3() {
-            std::vector<int>    nums1   { 0 };
-            int                 m       { 0 };
+            SUBCASE("test 2") {
+                std::vector<int>    nums1   { 1 };
+                int                 m       { 1 };
 
-            std::vector<int>    nums2   { 1 };
-            int                 n       { 1 };
+                std::vector<int>    nums2   { };
+                int                 n       { 0 };
 
-            merge(nums1, m, nums2, n);
+                merge(nums1, m, nums2, n);
 
-            assert( (nums1 == std::vector{ 1 }) );
-        }
+                CHECK( (nums1 == std::vector{ 1 }) );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 3") {
+                std::vector<int>    nums1   { 0 };
+                int                 m       { 0 };
 
-            std::cout << "All tests passed successfully" << std::endl;
+                std::vector<int>    nums2   { 1 };
+                int                 n       { 1 };
+
+                merge(nums1, m, nums2, n);
+
+                CHECK( (nums1 == std::vector{ 1 }) );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::merge_sorted_array

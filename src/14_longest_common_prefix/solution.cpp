@@ -24,8 +24,10 @@
 #include <string>
 #include <vector>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::longest_common_prefix {
 
     std::string longestCommonPrefix(std::vector<std::string>& strs) {
         
@@ -59,37 +61,26 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            std::vector<std::string> strs = { "flower","flow","flight" };
-            assert( longestCommonPrefix(strs) == "fl" );
-        }
+        TEST_CASE("0014. Longest Common Prefix") {
 
-        void test2() {
-            std::vector<std::string> strs = { "dog","racecar","car" };
-            assert( longestCommonPrefix(strs) == "" );
-        }
+            SUBCASE("test 1") {
+                std::vector<std::string> strs = { "flower","flow","flight" };
+                CHECK( longestCommonPrefix(strs) == "fl" );
+            }
 
-        void test3() {
-            std::vector<std::string> strs = { "ab","a" };
-            assert( longestCommonPrefix(strs) == "a" );
-        }
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                std::vector<std::string> strs = { "dog","racecar","car" };
+                CHECK( longestCommonPrefix(strs) == "" );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                std::vector<std::string> strs = { "ab","a" };
+                CHECK( longestCommonPrefix(strs) == "a" );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::longest_common_prefix

@@ -20,8 +20,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <doctest/doctest.h>
 
-namespace leetcode {
+
+namespace leetcode::plus_one {
 
     std::vector<int> plusOne(std::vector<int>& digits) {
         const int size = static_cast<int>(digits.size());
@@ -50,38 +52,26 @@ namespace leetcode {
 
     namespace testing {
 
-        void test1(void) {
-            std::vector<int> digits {1, 2, 3};
-            assert( (plusOne( digits ) == std::vector<int>{ 1, 2, 4 }) );
-        }
+        TEST_CASE("0066. Plus One") {
 
-        void test2() {
-            std::vector<int> digits {4, 3, 2, 1};
-            assert( (plusOne( digits ) == std::vector<int>{ 4, 3, 2, 2 }) );
-        }
-
-        void test3() {
-            std::vector<int> digits {9};
-            assert( (plusOne( digits ) == std::vector<int>{ 1, 0}) );
-        }
+            SUBCASE("test 1") {
+                std::vector<int> digits {1, 2, 3};
+                CHECK( (plusOne( digits ) == std::vector<int>{ 1, 2, 4 }) );
+            }
 
 
-        void runTests() {
-            std::cout << "Running predefined tests..." << std::endl;
-            
-            test1();
-            test2();
-            test3();
+            SUBCASE("test 2") {
+                std::vector<int> digits {4, 3, 2, 1};
+                CHECK( (plusOne( digits ) == std::vector<int>{ 4, 3, 2, 2 }) );
+            }
 
-            std::cout << "All tests passed successfully" << std::endl;
+
+            SUBCASE("test 3") {
+                std::vector<int> digits {9};
+                CHECK( (plusOne( digits ) == std::vector<int>{ 1, 0}) );
+            }
+
         }
     }   // namespace testing
 
-}   // namespace leetcode
-
-
-
-int main(int argc, const char * argv[]) {
-    leetcode::testing::runTests();
-    return 0;
-}
+}   // namespace leetcode::plus_one
